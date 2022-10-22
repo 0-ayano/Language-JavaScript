@@ -1,0 +1,38 @@
+<body>
+    <input type="button" value="Exec" onclick="downloadCsv();"/><br />
+<br />
+<div id="output"></div>
+<br />
+</body>
+
+
+<script>
+    function downloadCsv() {
+        var array = [
+            ['1', '2', '3'],
+            ['4', '5', '6'],
+            ['7', '8', '9'],
+        ];
+        // 本来であれば、foerEachやmapなどを使って2次元配列を作ることになるかと思います。その場合は、pushやconcat、new Arrayなどを使うことが多いと思います。
+        var csvData = this.arrToCSV(array);
+
+        var encodedUri = encodeURI(csvData); // csvDataをエンコード化する
+        var ele = document.createElement('a'); // a要素を作成する
+
+        ele.setAttribute('href', encodedUri);  // a要素に出力データを追加
+        ele.setAttribute('download', 'test' + '.csv'); // a要素に出力情報を追加。「'test'」部分は変数を入れることも可能。
+        ele.style.visibility = 'hidden';
+        document.body.appendChild(ele);
+        ele.click(); // HTMLドキュメントに追加したa要素を実行(clickイベント発火)
+        document.body.removeChild(ele);
+    }
+
+    function arrToCSV(array) {
+        let csvData = 'data:text/csv;charset=utf-8,'; /// 最初にcsvDataに出力方法を追加しておく
+        array.forEach(a => {
+            var row = a.join(',');
+            csvData += row + '\r\n';
+        });
+        return csvData;
+    }
+</script>
