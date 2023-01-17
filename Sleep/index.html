@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        function sleep(time) {
+            time *= 1000
+            return new Promise(resolve => setTimeout(resolve, time));
+        }
+
+        async function btn(){
+            let el = document.getElementById('output')
+            for(var i = 0; i<50; i++){
+                el.innerText += '+';
+                await sleep(1);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="btn()"> HERE</button>
+    <div id="output"></div>
+</body>
+
+</html>
+
+<!--
+    - [JavaScriptでスリープを実装する](https://www.techiedelight.com/ja/sleep-in-javascript/)
+-->
